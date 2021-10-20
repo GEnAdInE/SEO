@@ -10,4 +10,6 @@ You also need to download [chromedriver](https://sites.google.com/chromium.org/d
 
 
 # How to run 
+```bash
 main.py EMAIL PASSWORD KEYWORD1 KEYWORD2 ...
+```
