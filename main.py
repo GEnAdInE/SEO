@@ -4,6 +4,15 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+import time
+
+
+class SEODATA:  # use str for now maybe use a convert to convert 5.5K to 5500 later
+    volume: str
+    keywordDif: str
+    globalVolume: map
+    Results: str
+
 
 TmpArray = sys.argv
 TmpArray.__delitem__(0)
@@ -30,10 +39,41 @@ else:
     loginPass.send_keys(ListOfLogin[1])
     loginPass.send_keys(Keys.ENTER)
 
-    # check we got login
+    # waiting for page to load up
+    try:
+        WebDriverWait(driver, 3).until(
+            EC.presence_of_element_located((By.XPATH, '//*[@id="srf-searchbar"]/form/div/div[2]/div[1]/input')))
+    except:
+        print('took too long')
+        quit()
 
+keywordmap = dict()
 for keyword in ListOfKeyword:
     driver.get('https://www.semrush.com/analytics/keywordoverview/?q=' + keyword + '&db=fr')
-    # LOGIC FOR getting the data
+    currentSeoData = SEODATA()
+    try:
+        WebDriverWait(driver, 3).until(
+            EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="app"]/div/div/div[4]/div[2]/div/div[1]/div/div/div[1]/span[2]/span')))
+    except:
+        print('error to get data')
+        quit()
 
+    el = driver.find_element_by_xpath('//*[@id="app"]/div/div/div[4]/div[2]/div/div[1]/div/div/div[1]/span[2]/span')
+    currentSeoData.volume = el.text
+    # etc
+    # etc
+    print(currentSeoData)
+
+    # put data in map
+    keywordmap[keyword] = currentSeoData
+
+#end of program
+print('byebye')
 driver.close()
+
+
+def Quit():
+    print('Quitting')
+    driver.close()
+    exit(1)
