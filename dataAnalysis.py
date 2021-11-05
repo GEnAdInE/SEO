@@ -19,18 +19,18 @@ with open('TEST-DATA.csv', 'r', encoding='utf8') as file:
         tmplist = tmplist.split(',')
         newData = CurrentData()
         newData.keyword = row[0]
-        newData.dataPoint = [float(i) for i in tmplist]
+        newData.dataPoint = [float(i) for i in tmplist]  # convert to float
         ListOfData.append(newData)
         print(row)
 
 print('wait')
 test = ListOfData[0].dataPoint
-test = test[0:60]
-somme = 0+0
-i=0
+test = test[-60:]  # 60 last day
+somme = 0
+i = 0
 for num in test:
     somme += num
-    test[i] = num/100
+    test[i] = num / 100
     i += 1
 print(somme)
 
