@@ -47,7 +47,7 @@ else:
         print('took too long')
         quit()
 
-keywordmap = dict()
+keywordMap = dict()
 for keyword in ListOfKeyword:
     driver.get('https://www.semrush.com/analytics/keywordoverview/?q=' + keyword + '&db=fr')
     currentSeoData = SEODATA()
@@ -66,9 +66,9 @@ for keyword in ListOfKeyword:
     print(currentSeoData)
 
     # put data in map
-    keywordmap[keyword] = currentSeoData
+    keywordMap[keyword] = currentSeoData
 
-#end of program
+# end of program
 print('byebye')
 driver.close()
 
