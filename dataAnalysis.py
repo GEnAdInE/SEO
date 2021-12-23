@@ -1,38 +1,90 @@
+# for the annotation system ref :
+# https://stackoverflow.com/questions/7908636/how-to-add-hovering-annotations-in-matplotlib
+
+
+# import
 import csv
 from pylab import *
 import numpy as np
+import matplotlib as mpl
 import matplotlib.pyplot as plt
+
+# object
 
 
 class CurrentData:
     keyword: str
-    dataPoint: list
+    googleTrend: int
+    SEMrsuh: int
 
 
 ListOfData = []
 
-with open('TEST-DATA.csv', 'r', encoding='utf8') as file:
+
+# main code
+with open('Classeur1.csv', 'r', encoding='utf8') as file:
     reader = csv.reader(file, delimiter=';')
     for row in reader:
-        tmplist = row[1]
-        tmplist = tmplist[1:-1]
-        tmplist = tmplist.split(',')
         newData = CurrentData()
         newData.keyword = row[0]
-        newData.dataPoint = [float(i) for i in tmplist]  # convert to float
+        newData.googleTrend = int(row[1])
+        newData.SEMrsuh = int(row[2])
         ListOfData.append(newData)
         print(row)
 
 print('wait')
-test = ListOfData[0].dataPoint
-test = test[-60:]  # 60 last day
-somme = 0
-i = 0
-for num in test:
-    somme += num
-    test[i] = num / 100
-    i += 1
-print(somme)
 
-plt.plot(test)
+TrendArray = []
+SemRushArray = []
+WordArray = []
+
+# putting everything in array is easier when using plot
+for word in ListOfData:
+    TrendArray.append(word.googleTrend)
+    SemRushArray.append(word.SEMrsuh)
+    WordArray.append(word.keyword)
+
+# plot parameter
+fig, ax = plt.subplots()
+ax.set_xlim(0, 100)
+ax.set_ylim(0, 100)
+
+# create point
+sc = ax.scatter(TrendArray, SemRushArray)
+
+# generate the annotation
+annot = ax.annotate("", xy=(0, 0), xytext=(20, 20), textcoords="offset points",
+                    bbox=dict(boxstyle="round", fc="w"),
+                    arrowprops=dict(arrowstyle="->"))
+annot.set_visible(False)
+
+
+# function to update annot
+def update_annot(ind):
+    pos = sc.get_offsets()[ind["ind"][0]]
+    annot.xy = pos
+    text = "{}, Trend: {}, SEO: {}".format("".join([WordArray[n] for n in ind["ind"]]),
+                                           "".join(
+                                               str([TrendArray[n] for n in ind["ind"]])[1:-1]),
+                                           "".join(str([SemRushArray[n] for n in ind["ind"]])[1:-1]))
+    print(text)
+
+    annot.set_text(text)
+
+# called on hover event
+def hover(event):
+    vis = annot.get_visible()
+    if event.inaxes == ax:
+        cont, ind = sc.contains(event)
+        if cont:
+            update_annot(ind)
+            annot.set_visible(True)
+            fig.canvas.draw_idle()
+        else:
+            if vis:
+                annot.set_visible(False)
+                fig.canvas.draw_idle()
+
+
+fig.canvas.mpl_connect("motion_notify_event", hover)
 plt.show()
