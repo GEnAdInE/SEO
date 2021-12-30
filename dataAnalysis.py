@@ -4,35 +4,67 @@
 
 # import
 import csv
+import sys
 from pylab import *
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
-# object
+if len(sys.argv) > 1:
+    FilePath = sys.argv[1]
+else:
+    FilePath = "Empty"
 
 
+def yes_or_no(question):
+    while "the answer is invalid":
+        reply = str(input(question + ' (y/n): ')).lower().strip()
+        if reply[0] == 'y':
+            return True
+        if reply[0] == 'n':
+            return False
+
+
+# class to compile all data
 class CurrentData:
-    keyword: str
-    googleTrend: int
-    SEMrsuh: int
+    keyword: str  # the keyword
+    googleTrend: int  # google trend score
+    SEMrsuh: int  # Semrsuh score
 
 
-ListOfData = []
-
-
+ListOfData = []  # Array containing all our CurrentData Object , could be used later if needed
+PathIsOk = False
 # main code
-with open('Classeur1.csv', 'r', encoding='utf8') as file:
-    reader = csv.reader(file, delimiter=';')
-    for row in reader:
-        newData = CurrentData()
-        newData.keyword = row[0]
-        newData.googleTrend = int(row[1])
-        newData.SEMrsuh = int(row[2])
-        ListOfData.append(newData)
-        print(row)
+try:
+    while not PathIsOk:
+        if yes_or_no("Is this the right path ? : " + FilePath):
+            if FilePath.endswith('.csv'):
+                PathIsOk = True
+            else:
+                print("File don't end with a csv\n")
+                FilePath = input("Write the new path here : ")
+        else:
+            FilePath = input("Write the new path here : ")
 
-print('wait')
+    print('Reading data wait ! \n')
+
+    with open(FilePath, 'r', encoding='utf8') as file:
+        reader = csv.reader(file, delimiter=';')  # opening the csv file containing all data
+        for row in reader:
+            if len(row) == 3:  # ignore cases where the data are wrong
+                newData = CurrentData()  # Create Object CurrentData
+                # gathering the data
+                newData.keyword = row[0]
+                newData.googleTrend = int(row[1])
+                newData.SEMrsuh = int(row[2])
+                ListOfData.append(newData)
+                print(row)
+except:
+    print("An error has occurred , please check that the path is right")
+    raise
+
+print('All data have been read \n')
+print('Processing the data , please wait\n')
 
 TrendArray = []
 SemRushArray = []
@@ -71,6 +103,7 @@ def update_annot(ind):
 
     annot.set_text(text)
 
+
 # called on hover event
 def hover(event):
     vis = annot.get_visible()
@@ -86,5 +119,5 @@ def hover(event):
                 fig.canvas.draw_idle()
 
 
-fig.canvas.mpl_connect("motion_notify_event", hover)
-plt.show()
+fig.canvas.mpl_connect("motion_notify_event", hover)  # using a listener
+plt.show()  # drawing the plot
