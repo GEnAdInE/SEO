@@ -153,7 +153,7 @@ for element in KeyWordArray:
 
 print("Updating file")
 
-with open('newDATA.csv', 'w+', newline='') as file:
+with open(FilePath, 'w+', newline='') as file:
     mywriter = csv.writer(file, delimiter=';')
     mywriter.writerows(ExportArray)
     file.close()
