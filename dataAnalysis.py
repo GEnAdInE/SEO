@@ -51,14 +51,16 @@ try:
     with open(FilePath, 'r', encoding='utf8') as file:
         reader = csv.reader(file, delimiter=';')  # opening the csv file containing all data
         for row in reader:
-            if len(row) == 3:  # ignore cases where the data are wrong
+            if len(row) >= 3:  # ignore cases where the data are wrong
                 newData = CurrentData()  # Create Object CurrentData
                 # gathering the data
                 newData.keyword = row[0]
                 newData.googleTrend = int(row[1])
                 newData.SEMrsuh = int(row[2])
-                ListOfData.append(newData)
+                if newData.SEMrsuh >= 0:  # to not analyze object were we don't have data
+                    ListOfData.append(newData)
                 print(row)
+        file.close()
 except:
     print("An error has occurred , please check that the path is right")
     raise
