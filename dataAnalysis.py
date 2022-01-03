@@ -82,6 +82,8 @@ for word in ListOfData:
 fig, ax = plt.subplots()
 ax.set_xlim(0, 100)
 ax.set_ylim(0, 100)
+plt.xlabel("Google trend score")
+plt.ylabel("SEO Difficulty")
 
 # create point
 sc = ax.scatter(TrendArray, SemRushArray)
