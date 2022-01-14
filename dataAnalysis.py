@@ -3,6 +3,7 @@
 
 
 # import
+import os
 import csv
 import sys
 from pylab import *
@@ -26,19 +27,19 @@ def yes_or_no(question):
 
 
 # class to compile all data
-class CurrentData:
+class ExtractedData:
     keyword: str  # the keyword
     googleTrend: int  # google trend score
     SEMrsuh: int  # Semrsuh score
 
 
-ListOfData = []  # Array containing all our CurrentData Object , could be used later if needed
+ListOfData = []  # Array containing all our ExtractedData Object , could be used later if needed
 PathIsOk = False
 # main code
 try:
     while not PathIsOk:
         if yes_or_no("Is this the right path ? : " + FilePath):
-            if FilePath.endswith('.csv'):
+            if FilePath.endswith('.csv') and os.path.exists(FilePath):
                 PathIsOk = True
             else:
                 print("File don't end with a csv\n")
@@ -52,7 +53,7 @@ try:
         reader = csv.reader(file, delimiter=';')  # opening the csv file containing all data
         for row in reader:
             if len(row) >= 3:  # ignore cases where the data are wrong
-                newData = CurrentData()  # Create Object CurrentData
+                newData = ExtractedData()  # Create Object ExtractedData
                 # gathering the data
                 newData.keyword = row[0]
                 newData.googleTrend = int(row[1])
