@@ -7,13 +7,16 @@ SEO project
 pip install selenium
 pip install matplotlib
 ```
+
+This project require google chrome
+
 You also need to download [chromedriver](https://sites.google.com/chromium.org/driver/) and put it a the racine of the project
 
 
 # How to run 
 Main:
 ```bash
-./main.py EMAIL PASSWORD KEYWORD1 KEYWORD2 ...
+./main.py EMAIL PASSWORDS PAHT_TO_DATA.CSV
 ```
 DataAnalysis:
 ```bash

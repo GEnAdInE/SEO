@@ -77,6 +77,7 @@ with open(FilePath, 'r', encoding='utf8') as file:
     reader = csv.reader(file, delimiter=';')  # opening the csv file containing all data
     for row in reader:
         # gathering the data and putting it the Array
+        print(row)
         if len(row) >= 2:
             TmpEl = DataBaseObject()
             TmpEl.keyword = row[0]
