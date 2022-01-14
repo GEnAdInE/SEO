@@ -8,10 +8,13 @@ pip install selenium
 pip install matplotlib
 ```
 
-This project require google chrome
+This project require google chrome installed
 
-You also need to download [chromedriver](https://sites.google.com/chromium.org/driver/) and put it a the racine of the project
+For windows : You also need to download [chromedriver](https://sites.google.com/chromium.org/driver/) and put it a the racine of the project
+      
+For Linux : Downloand the chromedriver for linux and put it at ``` /usr/bin/ ```
 
+Note that you need the version of chromedriver corresponding to YOUR version of google chrome
 
 # How to run 
 Main:
