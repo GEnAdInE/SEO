@@ -42,3 +42,5 @@ Main for the Semrush data extraction
 DataAnalysis to plot the data received from the other group
 
 The official database are located in outputDataMean.csv
+
+Classeur1.csv is just a random dataset of word for testing
