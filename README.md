@@ -1,6 +1,12 @@
 # SEO
 SEO project
 
+#Requirement 
+
+Python 3
+Selenium
+matplotlib
+
 # How to install 
 
 ```bash
@@ -19,7 +25,7 @@ Note that you need the version of chromedriver corresponding to YOUR version of 
 # How to run 
 Main:
 ```bash
-./main.py EMAIL PASSWORDS PAHT_TO_DATA.CSV
+./main.py EMAIL PASSWORD PAHT_TO_DATA.CSV
 ```
 DataAnalysis:
 ```bash
@@ -33,4 +39,6 @@ or
 # Info
 Main for the Semrush data extraction
 
-DataAnalysis to edit and plot the data received from the other group
+DataAnalysis to plot the data received from the other group
+
+The official database are located in outputDataMean.csv
