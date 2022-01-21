@@ -4,8 +4,11 @@ SEO project
 #Requirement 
 
 Python 3
+
 Selenium
+
 matplotlib
+
 
 # How to install 
 
