@@ -1,6 +1,12 @@
 # SEO
 SEO project
 
+#Requirement 
+
+Python 3
+Selenium
+matplotlib
+
 # How to install 
 
 ```bash
@@ -8,15 +14,18 @@ pip install selenium
 pip install matplotlib
 ```
 
-This project require google chrome
+This project require google chrome installed
 
-You also need to download [chromedriver](https://sites.google.com/chromium.org/driver/) and put it a the racine of the project
+For windows : You also need to download [chromedriver](https://sites.google.com/chromium.org/driver/) and put it a the racine of the project
+      
+For Linux : Downloand the chromedriver for linux and put it at ``` /usr/bin/ ```
 
+Note that you need the version of chromedriver corresponding to YOUR version of google chrome
 
 # How to run 
 Main:
 ```bash
-./main.py EMAIL PASSWORDS PAHT_TO_DATA.CSV
+./main.py EMAIL PASSWORD PAHT_TO_DATA.CSV
 ```
 DataAnalysis:
 ```bash
@@ -30,4 +39,8 @@ or
 # Info
 Main for the Semrush data extraction
 
-DataAnalysis to edit and plot the data received from the other group
+DataAnalysis to plot the data received from the other group
+
+The official database are located in outputDataMean.csv
+
+Classeur1.csv is just a random dataset of word for testing
