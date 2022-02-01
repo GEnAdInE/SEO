@@ -19,7 +19,7 @@ from selenium import webdriver
 # -2 value means that semrush don't have any data about it
 class DataBaseObject:
     keyword: str
-    googleScore: int
+    googleScore: float
     keywordDif: int
     volume: int
     globalVolume: int
@@ -80,7 +80,7 @@ with open(FilePath, 'r', encoding='utf8') as file:
         if len(row) >= 2:
             TmpEl = DataBaseObject()
             TmpEl.keyword = row[0]
-            TmpEl.googleScore = int(row[1])
+            TmpEl.googleScore = float(row[1])
             if len(row) == 5:
                 TmpEl.keywordDif = int(row[2])
                 TmpEl.volume = int(row[3])

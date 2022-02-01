@@ -1,5 +1,5 @@
 # for the annotation system ref :
-# https://stackoverflow.com/questions/7908636/how-to-add-hovering-annotations-in-matplotlib
+    # https://stackoverflow.com/questions/7908636/how-to-add-hovering-annotations-in-matplotlib
 
 
 # import
@@ -29,7 +29,7 @@ def yes_or_no(question):
 # class to compile all data
 class ExtractedData:
     keyword: str  # the keyword
-    googleTrend: int  # google trend score
+    googleTrend: float  # google trend score
     SEMrsuh: int  # Semrsuh score
 
 
@@ -56,7 +56,7 @@ try:
                 newData = ExtractedData()  # Create Object ExtractedData
                 # gathering the data
                 newData.keyword = row[0]
-                newData.googleTrend = int(row[1])
+                newData.googleTrend = float(row[1])
                 newData.SEMrsuh = int(row[2])
                 if newData.SEMrsuh >= 0:  # to not analyze object were we don't have data
                     ListOfData.append(newData)
@@ -81,7 +81,7 @@ for word in ListOfData:
 
 # plot parameter
 fig, ax = plt.subplots()
-ax.set_xlim(0, 100)
+ax.set_xlim(0, 1)
 ax.set_ylim(0, 100)
 plt.xlabel("Google trend score")
 plt.ylabel("SEO Difficulty")
